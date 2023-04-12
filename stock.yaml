@@ -178,7 +178,7 @@ EtatCommande_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Commande):
 Reception_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Commande):
     id: Long ID
     commande: Commande
-    dateReception: LocaleDateTime
+    dateReception: LocalDateTime
     description: String LARGE
     receptionItems: ReceptionItem List
     etatReception: EtatReception
