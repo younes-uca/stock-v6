@@ -43,8 +43,8 @@ public class ReceptionConverter extends AbstractConverter<Reception, ReceptionDt
         Reception item = new Reception();
             if(StringUtil.isNotEmpty(dto.getId()))
                 item.setId(dto.getId());
-            if(StringUtil.isNotEmpty(dto.getDateReception()))
-                item.setDateReception(dto.getDateReception());
+/*            if(StringUtil.isNotEmpty(dto.getDateReception()))
+                item.setDateReception(dto.getDateReception());*/
             if(StringUtil.isNotEmpty(dto.getDescription()))
                 item.setDescription(dto.getDescription());
             if(dto.getCommande() != null && dto.getCommande().getId() != null){
@@ -71,8 +71,8 @@ public class ReceptionConverter extends AbstractConverter<Reception, ReceptionDt
             ReceptionDto dto = new ReceptionDto();
             if(StringUtil.isNotEmpty(item.getId()))
                 dto.setId(item.getId());
-            if(StringUtil.isNotEmpty(item.getDateReception()))
-                dto.setDateReception(item.getDateReception());
+            /*if(StringUtil.isNotEmpty(item.getDateReception()))
+                dto.setDateReception(item.getDateReception());*/
             if(StringUtil.isNotEmpty(item.getDescription()))
                 dto.setDescription(item.getDescription());
         if(this.commande && item.getCommande()!=null) {
