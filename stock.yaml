@@ -1,0 +1,361 @@
+#---------------- Abonne -----------------
+Abonne_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Abonne):
+    id: Long ID
+    code: String REF_REQUIERED
+    adresse: String
+    bloqued: Boolean
+    dateCreation: LocalDateTime
+    email: String
+    tel: String
+    logo: String
+    nom: String
+    prenom: String
+    nomSociete: String
+    pathBackUp: String
+    patente: String
+    rc: String
+    cnss: String
+    ifisc: String
+    ice: String
+    stores: Store List
+    
+    #---------------- Store -----------------
+
+Store_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Abonne):
+    id: Long ID
+    libelle: String LABEL_REQUIERED
+    reference: String REF_REQUIERED
+    abonne: Abonne
+    magasins: Magasin List
+
+
+Magasin_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Abonne):
+    id: Long ID
+    nom: String
+    adresse: String
+    store: Store
+
+#---------------- Produit -----------------
+
+Produit_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Produit):
+    id: Long ID
+    reference: String REF_REQUIERED
+    libelle: String LABEL_REQUIERED
+    categorieProduit: CategorieProduit
+    barcode: String
+    description: String
+    prixAchatMoyen: BigDecimal
+    quantite: BigDecimal
+    seuilAlert: BigDecimal
+    uniteMesure: UniteMesure
+    marque: Marque
+    store: Store
+    photoProduits: String
+    stockProduits: StockProduit List
+
+
+
+StockProduit_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Produit):
+    id: Long ID
+    magasin: Magasin
+    produit: Produit
+    quantite: BigDecimal
+    quantiteDeffecteuse: BigDecimal
+
+
+CategorieProduit_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Produit):
+    id: Long ID
+    reference: String REF_REQUIERED
+    libelle: String LABEL_REQUIERED
+
+
+#---------------- Achat -----------------
+Achat_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Achat):
+    id: Long ID
+    reference: String REF_REQUIERED
+    dateAchat: LocalDateTime
+    total: BigDecimal
+    totalPaye: BigDecimal
+    description: String LARGE
+    fournisseur: Fournisseur
+    paiementAchats: PaiementAchat List
+    achatItems: AchatItem List
+    avoirAchats: AvoirAchat List
+    store: Store
+
+AchatItem_IGNORE-FRONT_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Achat):
+    id: Long ID
+    produit: Produit
+    prixUnitaire: BigDecimal
+    prixVente: BigDecimal
+    quantite: BigDecimal
+    quantiteAvoir: BigDecimal
+    remise: BigDecimal
+    achat: Achat
+
+PaiementAchat_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Achat):
+    id: Long ID
+    reference: String REF_REQUIERED
+    datePaiement: LocalDateTime
+    montant: BigDecimal
+    achat: Achat
+    modePaiement: ModePaiement
+    description: String LARGE
+
+AvoirAchat_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Achat):
+    id: Long ID
+    dateAvoir: LocalDateTime
+    montant: BigDecimal
+    achat: Achat
+    avoirAchatItems: AvoirAchatItem List
+
+AvoirAchatItem_IGNORE-FRONT_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Achat):
+    id: Long ID
+    produit: Produit
+    montant: BigDecimal
+    quantite: BigDecimal
+    avoirAchat: AvoirAchat
+
+Fournisseur_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Collaborateur):
+    id: Long ID
+    ice: String REF_REQUIERED
+    nom: String LABEL_REQUIERED
+    tel: String
+    email: String
+    adresse: String
+    description: String LARGE
+    creance: BigDecimal
+
+#---------------- Commande -----------------
+
+Client_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Collaborateur):
+    id: Long ID
+    cin: String REF_REQUIERED
+    nom: String LABEL_REQUIERED
+    tel: String
+    email: String
+    adresse: String
+    description: String LARGE
+    creance: BigDecimal
+
+Commande_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Commande):
+    id: Long ID
+    reference: String REF_REQUIERED
+    dateCommande: LocalDateTime
+    total: BigDecimal
+    client: Client
+    totalePaye: BigDecimal
+    receptions: Reception List
+    commandeItems: CommandeItem List
+    store: Store
+    etatCommande: EtatCommande
+
+CommandeItem_IGNORE-FRONT_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Commande):
+    id: Long ID
+    prix: BigDecimal
+    quantite: BigDecimal
+    quantiteReceptionne: BigDecimal
+    produit: Produit
+    commande: Commande
+    etatCommande: EtatCommande
+
+PaiementCommande_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Commande):
+    id: Long ID
+    reference: String REF_REQUIERED
+    datePaiement: LocalDateTime
+    montant: BigDecimal
+    commande: Commande
+    modePaiement: ModePaiement
+    description: String LARGE
+
+EtatCommande_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Commande):
+    id: Long ID
+    libelle: String LABEL_REQUIERED
+    code: String REF_REQUIERED
+    style: String
+
+#----------------Reception-----------------
+Reception_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Commande):
+    id: Long ID
+    commande: Commande
+    dateReception: LocaleDateTime
+    description: String LARGE
+    receptionItems: ReceptionItem List
+    etatReception: EtatReception
+
+ReceptionItem_IGNORE-FRONT_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Commande):
+    id: Long ID
+    produit: Produit
+    quantite: BigDecimal
+    magasin: Magasin
+    reception: Reception
+
+EtatReception_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Commande):
+    id: Long ID
+    libelle: String LABEL_REQUIERED
+    code: String REF_REQUIERED
+    style: String
+
+
+#---------------- Demande -----------------
+
+Demande_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Demande):
+    id: Long ID
+    produit: Produit
+    client: Client
+    livraison: Livraison
+    magasin: Magasin
+    demandeItems: DemandeItem List
+    paiementDemandes: PaiementDemande List
+    etatDemande: EtatDemande
+
+
+DemandeItem_IGNORE-FRONT_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Demande):
+    id: Long ID
+    prix: BigDecimal
+    produit: Produit
+    quantite: BigDecimal
+    demande: Demande
+
+EtatDemande_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Demande):
+    id: Long ID
+    libelle: String LABEL_REQUIERED
+    code: String REF_REQUIERED
+    style: String
+
+
+PaiementDemande_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Demande):
+    id: Long ID
+    reference: String REF_REQUIERED
+    datePaiement: LocalDateTime
+    montant: BigDecimal
+    demande: Demande
+    modePaiement: ModePaiement
+    description: String LARGE
+
+#---------------- Livraison-----------------
+Livraison_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Demande):
+    id: Long ID
+    demande: Demande
+    dateLivraison: LocalDateTime
+    etatLivraison: EtatLivraison
+    livraisonItems: LivraisonItem List
+    client: Client
+
+
+LivraisonItem_IGNORE-FRONT_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Demande):
+    id: Long ID
+    produit: Produit
+    quantite: BigDecimal
+    livraison: Livraison
+
+EtatLivraison_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Demande):
+    id: Long ID
+    libelle: String LABEL_REQUIERED
+    code: String REF_REQUIERED
+    style: String
+
+
+PaiementLivraison_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Demande):
+    id: Long ID
+    reference: String REF_REQUIERED
+    dateLivraison: LocalDateTime
+    montant: BigDecimal
+    livraison : Livraison
+    vente: Vente
+    modePaiement: ModePaiement
+    description: String LARGE
+
+
+
+#---------------- EtatPaiement -----------------
+
+EtatPaiement_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Configuration):
+    id: Long ID
+    libelle: String LABEL_REQUIERED
+    code: String REF_REQUIERED
+    style: String
+
+ModePaiement_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Configuration):
+    id: Long ID
+    libelle: String LABEL_REQUIERED
+    code: String REF_REQUIERED
+    style: String
+
+UniteMesure_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Configuration):
+    id: Long ID
+    libelle: String LABEL_REQUIERED
+    code: String REF_REQUIERED
+
+Marque_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Configuration):
+    id: Long ID
+    libelle: String LABEL_REQUIERED
+    code: String REF_REQUIERED
+
+#---------------- Vente -----------------
+
+Vente_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Vente):
+    id: Long ID
+    reference: String REF_REQUIERED
+    dateVente: LocalDateTime
+    total: BigDecimal
+    totalPaye: BigDecimal
+    description: String LARGE
+    client: Client
+    paiementVentes: PaiementVente List
+    venteItems: VenteItem List
+
+VenteItem_IGNORE-FRONT_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Vente):
+    id: Long ID
+    produit: Produit
+    prixUnitaire: BigDecimal
+    quantite: BigDecimal
+    remise: BigDecimal
+    vente: Vente
+    quantiteAvoir: BigDecimal
+
+PaiementVente_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Vente):
+    id: Long ID
+    reference: String REF_REQUIERED
+    datePaiement: LocalDateTime
+    montant: BigDecimal
+    vente: Vente
+    modePaiement: ModePaiement
+    description: String LARGE
+
+
+AvoirVente_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Vente):
+    id: Long ID
+    dateAvoir: LocalDateTime
+    montant: BigDecimal
+    vente: Vente
+    avoirVenteItems: AvoirVenteItem List
+
+AvoirVenteItem_IGNORE-FRONT_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Vente):
+    id: Long ID
+    produit: Produit
+    montantAvoir: BigDecimal
+    quantite: BigDecimal
+    avoirVente: AvoirVente
+
+#---------------- Banque -----------------
+
+ProprietaireChequeBanque_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Cheque):
+    id: Long ID
+    proprietaireCheque: ProprietaireCheque
+    banque: Banque
+
+ProprietaireCheque_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Cheque):
+    id: Long ID
+    nom: String LABEL_REQUIERED
+    code: String  REF_REQUIERED
+
+Banque_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion Cheque):
+    id: Long ID
+    libelle: String LABEL_REQUIERED
+    code: String  REF_REQUIERED
+
+
+$CONFIG:
+    ms: '{name=ms1, packaging=myms1, url=http://localhost:8090/api/v1}'
+    currentMs: ms1
